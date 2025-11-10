@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Farmer Support Chatbot",
+  "description": "A chat interface that answers farmer questions, gives crop-specific advice based on weather, and provides scheduled notifications and market-price lookups.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
