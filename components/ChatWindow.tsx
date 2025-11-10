@@ -8,6 +8,8 @@ import { MessageAuthor } from '../types';
 interface ChatWindowProps {
   messages: ChatMessage[];
   isLoading: boolean;
+  onTogglePlay: (messageId: string, text: string) => void;
+  speakingMessageId: string | null;
 }
 
 const TypingIndicator = () => (
@@ -26,7 +28,7 @@ const TypingIndicator = () => (
     </div>
 );
 
-const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading }) => {
+const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onTogglePlay, speakingMessageId }) => {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -39,8 +41,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading }) => {
 
   return (
     <div className="flex-1 p-6 overflow-y-auto">
-      {messages.map((msg, index) => (
-        <Message key={index} message={msg} />
+      {messages.map((msg) => (
+        <Message key={msg.id} message={msg} onTogglePlay={onTogglePlay} speakingMessageId={speakingMessageId} />
       ))}
       {isLoading && <TypingIndicator />}
       <div ref={endOfMessagesRef} />
